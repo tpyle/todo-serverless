@@ -4,7 +4,10 @@
   "description": "Server to show a simple todo list",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "npm run clean && npm run build && aws lambda update-function-code --function-name  todo-app --zip-file fileb://build.zip --publish",
+    "clean": "rm -f build.zip",
+    "build": "zip -r build.zip node_modules api index.js app.js package.json package-lock.json"
   },
   "repository": {
     "type": "git",
@@ -17,9 +20,11 @@
   },
   "homepage": "https://github.com/tpyle/todo#readme",
   "dependencies": {
+    "aws-serverless-express": "^3.3.6",
     "axios": "^0.19.0",
     "bcrypt": "^3.0.6",
     "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongodb": "^3.3.1",
     "uuid": "^3.3.3"

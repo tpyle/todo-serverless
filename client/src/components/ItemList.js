@@ -30,8 +30,8 @@ class ItemList extends Component {
         e.preventDefault();
         let title = document.getElementById('title').value;
         let description = document.getElementById('description').value;
-	document.getElementById('title').value = "";
-	document.getElementById('description').value = "";
+        document.getElementById('title').value = "";
+        document.getElementById('description').value = "";
         createItem(title, description).then(items=>{
             this.setState({ items, failed: false });
         }).catch(err=>{

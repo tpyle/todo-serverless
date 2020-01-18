@@ -3,14 +3,9 @@ import Axios from 'axios';
 const localInstance = Axios.create({ withCredentials: true });
 
 localInstance.interceptors.request.use(config => {
-    config.url = `/api/v1${config.url}`;
+    config.url = `${process.env.REACT_APP_API_ROOT || ""}/v1${config.url}`;
     return config;
 });
-
-export const ping = async () => {
-    let res = await localInstance({ method: 'GET', url: '/ping' });
-    return res.data;
-};
 
 export const getItems = async () => {
     let res = await localInstance({ method: 'GET', url: `/item` });
